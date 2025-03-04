@@ -11,7 +11,9 @@ function PostDetail() {
     fetchSinglePost(id);
   }, [id, fetchSinglePost]);
 
-  const currentIndex = posts.findIndex((p) => p.id === parseInt(id));
+  if (!post) return <p>Loading post...</p>;
+
+  const currentIndex = posts.findIndex((p) => p.id === Number(id));
   const prevPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
   const nextPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
 

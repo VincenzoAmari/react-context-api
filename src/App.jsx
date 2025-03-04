@@ -6,9 +6,8 @@ import About from "./pages/About";
 import Posts from "./pages/Posts";
 import PostDetail from "./pages/PostDetail";
 import Layout from "./components/Layout"; 
-function App() {
 
-  
+function App() {
   return (
     <GlobalProvider>
       <Router>
