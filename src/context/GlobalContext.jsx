@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-const GlobalContext = createContext();
+const GlobalContext = createContext(); // 🔹 Crea il contesto
 
 export const useGlobalContext = () => {
   return useContext(GlobalContext);
@@ -8,11 +8,12 @@ export const useGlobalContext = () => {
 
 export const GlobalProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
-  const [post, setPost] = useState(null); 
+  const [post, setPost] = useState(null);
 
   const fetchPosts = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/posts");
+      if (!response.ok) throw new Error("Errore nel caricamento");
       const data = await response.json();
       setPosts(data);
     } catch (error) {
@@ -23,6 +24,7 @@ export const GlobalProvider = ({ children }) => {
   const fetchSinglePost = async (id) => {
     try {
       const response = await fetch(`http://localhost:3000/api/posts/${id}`);
+      if (!response.ok) throw new Error("Errore nel caricamento");
       const data = await response.json();
       setPost(data);
     } catch (error) {
