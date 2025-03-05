@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext"; // Import the custom hook
 import "../index.css";
 
 // Mostro la lista dei post in modo semplice
 function Posts() {
-  const { posts, fetchPosts } = useGlobalContext(); // Prendo i post e la funzione dal context
+  const { posts, } = useGlobalContext(); // Prendo i post e la funzione dal context
   const navigate = useNavigate(); // Per navigare tra le pagine
+  console.log (posts)
 
-  // Carico i post all'avvio usando useEffect con Promise
-  useEffect(() => {
-    fetchPosts();
-  }, [fetchPosts]);
+//   // Carico i post all'avvio usando useEffect con Promise
+//   useEffect(() => {
+//     fetchPosts();
+//   }, [fetchPosts]);
 
   return (
     <div className="container">
