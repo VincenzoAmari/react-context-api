@@ -1,44 +1,44 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-const GlobalContext = createContext(); // 🔹 Crea il contesto
+const GlobalContext = createContext();
 
 export const useGlobalContext = () => {
-  return useContext(GlobalContext);
+  const context = useContext(GlobalContext);
+  return context; 
 };
 
 export const GlobalProvider = ({ children }) => {
-  const [posts, setPosts] = useState([]);
-  const [post, setPost] = useState(null);
+  const [posts, setPosts] = useState([]); 
+  const [post, setPost] = useState(null); 
 
-  const fetchPosts = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/api/posts");
-      if (!response.ok) throw new Error("Errore nel caricamento");
-      const data = await response.json();
-      setPosts(data);
-    } catch (error) {
-      console.error("Errore nel caricamento dei post:", error);
-    }
+  const fetchPosts = () => {
+    fetch("http://localhost:3000/api/posts")
+      .then(response => response.json())
+      .then(data => setPosts(data)) 
+      .catch(error => console.log("Errore nel caricamento dei post:", error)); 
   };
 
-  const fetchSinglePost = async (id) => {
-    try {
-      const response = await fetch(`http://localhost:3000/api/posts/${id}`);
-      if (!response.ok) throw new Error("Errore nel caricamento");
-      const data = await response.json();
-      setPost(data);
-    } catch (error) {
-      console.error("Errore nel caricamento del post:", error);
-    }
+  const fetchSinglePost = (id) => {
+    fetch(`http://localhost:3000/api/posts/${id}`)
+      .then(response => response.json())
+      .then(data => setPost(data)) 
+      .catch(error => console.log("Errore nel caricamento del post:", error)); 
   };
 
   useEffect(() => {
     fetchPosts();
   }, []);
 
+  const value = {
+    posts, 
+    post, 
+    fetchPosts, 
+    fetchSinglePost,
+  };
+
   return (
-    <GlobalContext.Provider value={{ posts, post, fetchPosts, fetchSinglePost }}>
-      {children}
+    <GlobalContext.Provider value={value}>
+      {children} 
     </GlobalContext.Provider>
   );
 };
