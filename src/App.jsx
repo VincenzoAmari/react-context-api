@@ -1,28 +1,14 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { GlobalProvider } from "./context/GlobalContext";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Posts from "./pages/Posts";
-import PostDetail from "./pages/PostDetail";
-import Layout from "./components/Layout"; 
-
+import { useState } from 'react'
+import './App.css'
 
 function App() {
+
+
   return (
-    <BrowserRouter>
-      <GlobalProvider>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/posts" element={<Posts />} />
-            <Route path="/posts/:id" element={<PostDetail />} />
-          </Routes>
-        </Layout>
-      </GlobalProvider>
-    </BrowserRouter>
-  );
+    <>
+      
+    </>
+  )
 }
 
-export default App;
+export default App
